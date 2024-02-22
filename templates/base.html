@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock title %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">CodeBytes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block blogactive %}{% endblock blogactive %}" aria-current="page"
+              href="/blog">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="/contact">Contact</a>
+          </li>
+        </ul>
+        <form method="get" action="/search" class="d-flex mx-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
+            id="query">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Welcome {{request.user}}
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+        {% else %}
+        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#signupModal">
+          SignUp
+        </button>
+        <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+          Login
+        </button>
+        {% endif %}
+
+      </div>
+    </div>
+  </nav>
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+  <!-- Signup modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="signupModalTitle">SignUp</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/signup">
+            {% csrf_token %}
+            <div class="mb-2">
+              <label for="username" class="form-label">Choose a unique Username</label>
+              <input type="text" class="form-control" name="username" id="username"
+                placeholder="Choose a unique Username (Lowercase & Alphanumeric)" required>
+            </div>
+            <div class="mb-2">
+              <label for="fname" class="form-label">First Name</label>
+              <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter first name" required>
+            </div>
+            <div class="mb-2">
+              <label for="lname" class="form-label">Last Name</label>
+              <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter last name" required>
+            </div>
+            <div class="mb-2">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+            </div>
+            <div class="mb-2">
+              <label for="pass1" class="form-label">Choose your Password</label>
+              <input type="password" class="form-control" name="pass1" id="pass1" placeholder="Choose your Password"
+                required>
+            </div>
+            <div class="mb-2">
+              <label for="pass2" class="form-label">Enter your Password again</label>
+              <input type="password" class="form-control" name="pass2" id="pass2"
+                placeholder="Enter your password again" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginModalTitle">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="/login">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="loginusername" class="form-label">Enter Username</label>
+              <input type="text" class="form-control" name="loginusername" id="loginusername"
+                placeholder="Enter Username" required>
+            </div>
+            <div class="mb-3">
+              <label for="pass" class="form-label">Enter your Password</label>
+              <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter your Password"
+                required>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% block body %}
+  {% endblock body %}
+  <div class="container">
+    <footer class="py-3 my-4">
+      <p class="text-center text-body-secondary">© 2024 CodeBytes, Inc</p>
+    </footer>
+  </div>
+
+  {% block js %}
+  {% endblock js %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

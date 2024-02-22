@@ -1,0 +1,116 @@
+/* Download Section */
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  text-align: center;
+  padding: 20px;
+}
+
+.box {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  text-align: center; 
+}
+
+.box-img {
+  width: 150px;
+  height: 150px;
+  padding: 15px;
+}
+
+.box-content {
+  padding: 12px;
+}
+
+.box-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+}
+
+.btn-download:hover {
+  background-color: #0056b3;
+}
+
+
+
+/* Comment section */
+
+
+.comment-section {
+  margin: 15px auto;
+  padding: 1px;
+}
+
+.comment {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-text {
+  margin-left: 49px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.timestamp {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+/* Replies section */
+.replies {
+  padding: 10px;
+  border: 1px solid #80a300;
+  margin: 10px;
+}
+
+.reply-user-info {
+  margin-left: 30px;
+}
+
+.reply-user-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.reply-user-info p {
+  margin-left: 45px
+}
+
+
+
+

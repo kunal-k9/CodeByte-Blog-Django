@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+
+{% block body %}
+
+<div class="container my-3">
+    <div class="p-5 text-center bg-body-tertiary rounded-3">
+        <h1 class="text-body-emphasis">About Us</h1>
+        <p class="col-lg-8 mx-auto fs-6 text-muted">
+            Welcome to CodeBytes, your go-to destination for all things coding and technology! At CodeBytes, we are
+            passionate about empowering individuals to dive into the exciting world of programming and
+            software development.<br>
+
+            Our mission is to provide valuable resources, insightful tutorials, and engaging content to learners and
+            professionals alike. Whether you're a seasoned developer looking to stay updated on the latest industry
+            trends or a beginner eager to embark on your coding journey, we've got you covered.<br>
+
+            Led by a team of experienced developers and tech enthusiasts, our blog strives to make complex coding
+            concepts accessible and understandable for everyone. We believe that learning to code opens up a world of
+            opportunities, and we're here to guide you every step of the way.<br>
+
+            Join us as we explore the endless possibilities of coding and technology together. Let's unlock your full
+            potential and shape the future of technology, one line of code at a time!
+        </p>
+        <div class="d-inline-flex gap-2 mb-5">
+            <a class="btn btn-primary btn-lg" type="button" href="/blog">Explore Our Blog</a>
+            <a class="btn btn-primary btn-lg" type="button" href="/contact">Contact Us</a>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+{% block homeactive %} active {% endblock homeactive %}
+
+{% block body %}
+
+<div class="container py-4">
+    <div class="p-4 mb-4 bg-body-tertiary rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to CodeBytes</h1>
+            <p class="col-md-8 fs-5">Step into the dynamic world of coding through our blog, where innovation
+                intertwines with exploration in the digital realm! Embracing Steve Jobs' timeless wisdom, 'Everyone
+                should learn how to code, because it teaches you how to think,' we invite you to embark on an enriching
+                journey. </p>
+            <a class="btn btn-primary btn-lg" type="button" href="/blog">Explore Our Blog</a>
+        </div>
+    </div>
+</div>
+<div class="container py-4">
+    <!-- Notes Download -->
+    <h2 class="heading">Download Notes by CodeBytes</h2>
+    <div class="boxes">
+        {% for file in files %}
+        <div class="box">
+            <img src="{{file.thumbnail}}" alt="{{file.file_name}}" class="box-img">
+            <div class="box-content">
+                <h2 class="box-title">{{file.file_name}}</h2>
+                <a href="{{file.file.url}}" class="btn-download">Download</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="container py-4">
+    <h2 class="heading">Popular Blog Posts</h2>
+    {% for post in popular_posts %}
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary-emphasis">Article by {{post.author}} ({{post.views}}
+                views)</strong>
+            <h3 class="mb-0"><a href="/blog/{{post.slug}}"
+                    style="text-decoration: none; color: black;">{{post.title}}</a>
+            </h3>
+            <div class="mb-1 text-body-secondary">{{post.datetime}}</div>
+            <p class="card-text mb-auto">
+            <div class="preview">{{post.content|safe| truncatechars:300}}</div>
+            </p>
+            <div class="my-3">
+                <a class="btn btn-outline-primary rounded-pill" href="/blog/{{post.slug}}">Continue reading</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock body %}
