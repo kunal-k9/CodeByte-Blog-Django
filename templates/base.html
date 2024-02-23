@@ -36,14 +36,13 @@
           </li>
         </ul>
         <form method="get" action="/search" class="d-flex mx-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query"
-            id="query">
+          <input class="form-control me-2" type="search" placeholder="Search" name="query" id="query">
+
           <button class="btn btn-outline-primary" type="submit">Search</button>
         </form>
         {% if user.is_authenticated %}
         <div class="dropdown">
-          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Welcome {{request.user}}
           </button>
           <ul class="dropdown-menu">
